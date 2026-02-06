@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Business;
+use App\Models\Company;
 use App\Models\Contact;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +14,11 @@ class ContactSeeder extends Seeder
      */
     public function run(): void
     {
-        Contact::factory(30)->create();
+        Business::all()->each(function (Business $business): void {
+            Contact::factory(5)->create([
+                'business_id' => $business->id,
+                'company_id' => Company::where('business_id', $business->id)->inRandomOrder()->first()?->id,
+            ]);
+        });
     }
 }

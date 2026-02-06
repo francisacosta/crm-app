@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\Activities\Schemas;
 
-use Filament\Forms\Components\DateTimePickerInput;
-use Filament\Forms\Components\Section;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class ActivityForm
@@ -25,7 +25,7 @@ class ActivityForm
                                 'note' => 'Note',
                             ])
                             ->required(),
-                        DateTimePickerInput::make('activity_date'),
+                        DateTimePicker::make('activity_date'),
                         Textarea::make('content')
                             ->required()
                             ->maxLength(65535)

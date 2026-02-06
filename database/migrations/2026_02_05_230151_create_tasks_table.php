@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('business_id')->nullable();
             $table->string('title');
             $table->text('description')->nullable();
             $table->enum('status', ['open', 'in_progress', 'completed', 'cancelled'])->default('open');

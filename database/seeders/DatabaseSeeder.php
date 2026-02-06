@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            BusinessSeeder::class,
             CompanySeeder::class,
             ContactSeeder::class,
             DealSeeder::class,

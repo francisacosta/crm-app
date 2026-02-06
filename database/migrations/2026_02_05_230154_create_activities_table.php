@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('business_id')->nullable();
             $table->string('type');
             $table->text('content');
             $table->dateTime('activity_date')->nullable();

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Business;
 use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Deal;
@@ -21,6 +22,7 @@ class ActivityFactory extends Factory
     public function definition(): array
     {
         return [
+            'business_id' => Business::factory(),
             'type' => fake()->randomElement(['call', 'email', 'meeting', 'note']),
             'content' => fake()->text(300),
             'activity_date' => fake()->dateTimeBetween('-2 months', 'now'),

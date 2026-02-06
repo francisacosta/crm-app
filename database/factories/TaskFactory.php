@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Business;
 use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Deal;
@@ -21,6 +22,7 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
+            'business_id' => Business::factory(),
             'title' => fake()->sentence(),
             'description' => fake()->text(300),
             'status' => fake()->randomElement(['open', 'in_progress', 'completed', 'cancelled']),

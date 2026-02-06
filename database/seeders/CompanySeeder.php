@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Business;
 use App\Models\Company;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,8 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        Company::factory(10)->create();
+        Business::all()->each(function (Business $business): void {
+            Company::factory(3)->create(['business_id' => $business->id]);
+        });
     }
 }

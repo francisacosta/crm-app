@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('deals', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('business_id')->nullable();
             $table->string('name');
             $table->decimal('value', 12, 2)->nullable();
             $table->enum('status', ['prospecting', 'qualification', 'negotiation', 'won', 'lost'])->default('prospecting');

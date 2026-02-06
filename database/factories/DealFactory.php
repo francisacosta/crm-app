@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Business;
 use App\Models\Company;
 use App\Models\Contact;
 use App\Models\User;
@@ -20,6 +21,7 @@ class DealFactory extends Factory
     public function definition(): array
     {
         return [
+            'business_id' => Business::factory(),
             'name' => fake()->catchPhrase(),
             'value' => fake()->randomFloat(2, 5000, 500000),
             'status' => fake()->randomElement(['prospecting', 'qualification', 'negotiation', 'won', 'lost']),
