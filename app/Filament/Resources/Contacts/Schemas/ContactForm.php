@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Contacts\Schemas;
 
+use App\Filament\Resources\Companies\Schemas\CompanyForm;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -32,6 +33,7 @@ class ContactForm
                         TextInput::make('job_title')
                             ->maxLength(255),
                         Select::make('company_id')
+                            ->createOptionForm(CompanyForm::configure(Schema::make())->getComponents())
                             ->relationship('company', 'name'),
                     ]),
                 Section::make('Additional Information')
