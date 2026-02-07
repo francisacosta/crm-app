@@ -16,7 +16,7 @@ class DealSeeder extends Seeder
     public function run(): void
     {
         Business::all()->each(function (Business $business): void {
-            Deal::factory(4)->create([
+            Deal::factory(100)->create([
                 'business_id' => $business->id,
                 'company_id' => Company::where('business_id', $business->id)->inRandomOrder()->first()?->id,
                 'contact_id' => Contact::where('business_id', $business->id)->inRandomOrder()->first()?->id,

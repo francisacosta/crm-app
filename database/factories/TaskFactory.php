@@ -33,6 +33,7 @@ class TaskFactory extends Factory
             'deal_id' => Deal::factory(),
             'assigned_to' => User::factory(),
             'created_by' => User::factory(),
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

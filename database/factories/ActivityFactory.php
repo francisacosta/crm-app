@@ -25,11 +25,12 @@ class ActivityFactory extends Factory
             'business_id' => Business::factory(),
             'type' => fake()->randomElement(['call', 'email', 'meeting', 'note']),
             'content' => fake()->text(300),
-            'activity_date' => fake()->dateTimeBetween('-2 months', 'now'),
+            'activity_date' => fake()->dateTimeBetween('-1 year', 'now'),
             'company_id' => Company::factory(),
             'contact_id' => Contact::factory(),
             'deal_id' => Deal::factory(),
             'user_id' => User::factory(),
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('business_id')->nullable();
             $table->string('name');
             $table->decimal('value', 12, 2)->nullable();
-            $table->enum('status', ['prospecting', 'qualification', 'negotiation', 'won', 'lost'])->default('prospecting');
+            // Status stored as string to allow using a PHP enum class for values
+            $table->string('status')->default('prospecting');
             $table->date('expected_close_date')->nullable();
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->foreignId('contact_id')->nullable()->constrained()->onDelete('set null');

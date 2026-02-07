@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Deals\Schemas;
 
+use App\Enums\DealStatus;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -25,13 +26,7 @@ class DealForm
                             ->numeric()
                             ->prefix('$'),
                         Select::make('status')
-                            ->options([
-                                'prospecting' => 'Prospecting',
-                                'qualification' => 'Qualification',
-                                'negotiation' => 'Negotiation',
-                                'won' => 'Won',
-                                'lost' => 'Lost',
-                            ])
+                            ->options(DealStatus::asSelect())
                             ->required(),
                         DatePicker::make('expected_close_date'),
                         Select::make('company_id')

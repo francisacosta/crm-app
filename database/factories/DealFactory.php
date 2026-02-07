@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\DealStatus;
 use App\Models\Business;
 use App\Models\Company;
 use App\Models\Contact;
@@ -24,12 +25,13 @@ class DealFactory extends Factory
             'business_id' => Business::factory(),
             'name' => fake()->catchPhrase(),
             'value' => fake()->randomFloat(2, 5000, 500000),
-            'status' => fake()->randomElement(['prospecting', 'qualification', 'negotiation', 'won', 'lost']),
+            'status' => fake()->randomElement(DealStatus::values()),
             'expected_close_date' => fake()->dateTimeBetween('now', '+6 months'),
             'company_id' => Company::factory(),
             'contact_id' => Contact::factory(),
             'user_id' => User::factory(),
             'notes' => fake()->text(200),
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }
