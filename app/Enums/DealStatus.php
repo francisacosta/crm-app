@@ -2,7 +2,10 @@
 
 namespace App\Enums;
 
-enum DealStatus: string
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasLabel;
+
+enum DealStatus: string implements HasColor, HasLabel
 {
     case Prospecting = 'prospecting';
     case Qualification = 'qualification';
@@ -10,6 +13,27 @@ enum DealStatus: string
     case Won = 'won';
     case Lost = 'lost';
 
+    public function getLabel(): string
+    {
+        return match ($this) {
+            self::Prospecting => 'Prospecting',
+            self::Qualification => 'Qualification',
+            self::Negotiation => 'Negotiation',
+            self::Won => 'Won',
+            self::Lost => 'Lost',
+        };
+    }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::Prospecting => 'gray',
+            self::Qualification => 'info',
+            self::Negotiation => 'warning',
+            self::Won => 'success',
+            self::Lost => 'danger',
+        };
+    }
 
     /**
      * Get all string values for random selection or mapping.

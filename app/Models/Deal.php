@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\DealStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -34,6 +35,7 @@ class Deal extends Model
         return [
             'expected_close_date' => 'date',
             'value' => 'decimal:2',
+            'status' => DealStatus::class,
         ];
     }
 

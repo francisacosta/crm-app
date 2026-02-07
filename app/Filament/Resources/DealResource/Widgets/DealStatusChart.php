@@ -45,9 +45,9 @@ class DealStatusChart extends EChartWidget
             ->get()
             ->map(fn ($r) => [
                 'value' => $r->value,
-                'name' => ucfirst(str_replace('_', ' ', $r->status)),
+                'name' => ucfirst(str_replace('_', ' ', $r->status->value)),
                 'itemStyle' => [
-                    'color' => $statusColors[$r->status] ?? '#999999',
+                    'color' => $statusColors[$r->status->value] ?? '#999999',
                 ],
             ])
             ->all();
