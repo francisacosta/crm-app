@@ -9,6 +9,7 @@ A modern customer relationship management system built with Laravel and Filament
 - **AI Chat Agent** - Intelligent AI assistant for customer interactions
 - **Deals** - Track and manage sales opportunities with deal pipelines
 - **Activity Logs** - Comprehensive audit trail of all system activities
+- **Email** - Send and receive emails directly within the app
 - **Roles & Permission Control** - Fine-grained access control and team management
 - **Export to 3rd Party Apps** - Seamlessly integrate with external services (TBD)
 
