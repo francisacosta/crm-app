@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
     {
         $business = Business::factory()
             ->has(User::factory(5))
-            ->create();
+            ->create([
+                'slug' => 'test',
+            ]);
 
         $superAdmin = User::factory()->create([
             'name' => 'Test User',
