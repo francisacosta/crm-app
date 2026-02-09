@@ -21,14 +21,16 @@ class DealFactory extends Factory
      */
     public function definition(): array
     {
+        $company = Company::factory();
+
         return [
             'business_id' => Business::factory(),
             'name' => fake()->catchPhrase(),
             'value' => fake()->randomFloat(2, 5000, 500000),
             'status' => fake()->randomElement(DealStatus::values()),
             'expected_close_date' => fake()->dateTimeBetween('now', '+6 months'),
-            'company_id' => Company::factory(),
-            'contact_id' => Contact::factory(),
+            'company_id' => $company,
+            'contact_id' => Contact::factory()->for($company),
             'user_id' => User::factory(),
             'notes' => fake()->text(200),
             'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
