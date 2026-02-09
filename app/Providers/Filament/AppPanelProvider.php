@@ -11,6 +11,7 @@ use App\Filament\Widgets\DealsValueTrend;
 use App\Filament\Widgets\StatsOverview;
 use App\Filament\Widgets\TaskStatusStats;
 use App\Filament\Widgets\UserAssignmentsTable;
+use App\Filament\Widgets\UserDealsTable;
 use App\Models\Business;
 use Elemind\FilamentECharts\FilamentEChartsPlugin;
 use Filament\Http\Middleware\Authenticate;
@@ -63,6 +64,7 @@ class AppPanelProvider extends PanelProvider
                 DealsValueTrend::class,
                 DealStatusChart::class,
                 UserAssignmentsTable::class,
+                UserDealsTable::class,
             ])
             ->middleware([
                 EncryptCookies::class,
