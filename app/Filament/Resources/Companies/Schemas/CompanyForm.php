@@ -45,6 +45,7 @@ class CompanyForm
                             ->maxLength(100),
                     ]),
                 Section::make('Additional Information')
+                    ->columnSpanFull()
                     ->components([
                         Textarea::make('notes')
                             ->maxLength(65535),

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Tasks\Pages;
 
+use App\Filament\Widgets\TaskStatusStats;
 use App\Filament\Resources\Tasks\TaskResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
@@ -14,6 +15,13 @@ class ListTasks extends ListRecords
     {
         return [
             CreateAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            TaskStatusStats::class,
         ];
     }
 }
