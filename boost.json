@@ -1,9 +1,18 @@
 {
     "agents": [
-        "copilot"
+        "copilot",
+        "codex"
     ],
     "guidelines": true,
     "herd_mcp": false,
     "mcp": true,
-    "sail": true
+    "packages": [
+        "filament/filament",
+        "relaticle/flowforge"
+    ],
+    "sail": true,
+    "skills": [
+        "tailwindcss-development",
+        "flowforge-development"
+    ]
 }
