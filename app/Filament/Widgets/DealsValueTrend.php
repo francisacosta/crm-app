@@ -4,6 +4,8 @@ namespace App\Filament\Widgets;
 
 use App\Models\Deal;
 use Elemind\FilamentECharts\Widgets\EChartWidget;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class DealsValueTrend extends EChartWidget
@@ -29,20 +31,26 @@ class DealsValueTrend extends EChartWidget
      */
     protected function getOptions(): array
     {
+        $monthExpression = match (DB::getDriverName()) {
+            'sqlite' => "strftime('%Y-%m-01', created_at)",
+            'pgsql' => "to_char(created_at, 'YYYY-MM-01')",
+            default => "DATE_FORMAT(created_at, '%Y-%m-01')",
+        };
+
         $rows = Deal::query()
-            ->select(DB::raw('DATE(created_at) as date'), DB::raw('COALESCE(SUM(value), 0) as total'))
-            ->groupBy('date')
-            ->orderBy('date')
+            ->selectRaw($monthExpression.' as month')
+            ->selectRaw('COALESCE(SUM(value), 0) as total')
+            ->groupByRaw($monthExpression)
+            ->orderByRaw($monthExpression)
             ->get()
             ->map(function ($r) {
                 return [
-                    'date' => $r->date,
+                    'month' => $r->month,
                     'total' => (float) $r->total,
                 ];
             });
 
-        $dates = $rows->pluck('date')->all();
-        $totals = $rows->pluck('total')->all();
+        [$labels, $totals] = $this->buildMonthlySeries($rows);
 
         return [
             'tooltip' => [
@@ -50,7 +58,7 @@ class DealsValueTrend extends EChartWidget
             ],
             'xAxis' => [
                 'type' => 'category',
-                'data' => $dates,
+                'data' => $labels,
                 'boundaryGap' => false,
             ],
             'yAxis' => [
@@ -69,5 +77,34 @@ class DealsValueTrend extends EChartWidget
                 ],
             ],
         ];
+    }
+
+    private function buildMonthlySeries(Collection $rows): array
+    {
+        if ($rows->isEmpty()) {
+            return [[], []];
+        }
+
+        $totalsByMonth = $rows
+            ->mapWithKeys(function ($row) {
+                return [$row['month'] => $row['total']];
+            })
+            ->all();
+
+        $start = Carbon::createFromFormat('Y-m-d', $rows->first()['month'])->startOfMonth();
+        $end = Carbon::createFromFormat('Y-m-d', $rows->last()['month'])->startOfMonth();
+
+        $labels = [];
+        $totals = [];
+        $cursor = $start->copy();
+
+        while ($cursor->lessThanOrEqualTo($end)) {
+            $monthKey = $cursor->format('Y-m-01');
+            $labels[] = $cursor->format('M Y');
+            $totals[] = (float) ($totalsByMonth[$monthKey] ?? 0);
+            $cursor->addMonth();
+        }
+
+        return [$labels, $totals];
     }
 }
