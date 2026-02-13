@@ -11,7 +11,7 @@ class UserAssignmentsTable extends TableWidget
 {
     protected static ?string $icon = 'heroicon-o-users';
 
-    protected static ?string $heading = 'User Assignments';
+    protected static ?string $heading = 'Tasks assigned by Users';
 
     public function table(Table $table): Table
     {

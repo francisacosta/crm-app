@@ -11,7 +11,7 @@ class UserDealsTable extends TableWidget
 {
     protected static ?string $icon = 'heroicon-o-briefcase';
 
-    protected static ?string $heading = 'User Deals';
+    protected static ?string $heading = 'Deals assigned by Users';
 
     public function table(Table $table): Table
     {

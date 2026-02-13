@@ -12,7 +12,7 @@ class DealStatusStats extends BaseWidget
 {
     protected static ?string $icon = 'heroicon-o-briefcase';
 
-    protected ?string $heading = 'Deal Status Overview';
+    protected ?string $heading = 'Deal Pipelines';
 
     /**
      * @return array<Stat>
@@ -32,8 +32,8 @@ class DealStatusStats extends BaseWidget
             $sum = Deal::where('status', $case->value)->sum('value');
             $label = ucfirst(str_replace('_', ' ', $case->value));
             $config = $statusConfig[$case->value];
-            $stats[] = Stat::make($label, number_format((float) $sum, 2))
-                ->description('Pipeline value')
+            $stats[] = Stat::make('Pipeline Value', number_format((float) $sum, 2))
+                ->description($label)
                 ->descriptionIcon($config['icon'], IconPosition::Before)
                 ->color($config['color']);
         }
